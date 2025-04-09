@@ -10,21 +10,21 @@ const ImageList = [
     img: Image1,
     title: "Upto 50% off on all Men's Wear",
     description:
-      "lorem His Life will forever be Changed dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "His life will forever be changed... Grab deals before they vanish like stardust!",
   },
   {
     id: 2,
     img: Image2,
     title: "30% off on all Women's Wear",
     description:
-      "Who's there lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Style, sparkle, and stardust ✨ – shop your favorite comic hero looks today!",
   },
   {
     id: 3,
     img: Image3,
-    title: "70% off on all Products Sale",
+    title: "70% off on All Products Sale",
     description:
-      "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Unleash your superhero style – limited time cosmic clearance!",
   },
 ];
 
@@ -43,58 +43,55 @@ const Hero = ({ handleOrderPopup }) => {
   };
 
   return (
-    <div className="relative overflow-hidden min-h-[550px] sm:min-h-[650px] bg-gray-100 flex justify-center items-center dark:bg-slate-950 dark:text-white duration-200 ">
-      {/* background pattern */}
-      <div className="h-[700px] w-[700px] bg-primary/40 absolute -top-1/2 right-0 rounded-3xl rotate-45 -z[8]"></div>
+    <div className="relative overflow-hidden min-h-[550px] sm:min-h-[650px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white flex justify-center items-center">
+      {/* Starry swirl background */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('/starry-bg.png')] bg-cover bg-center opacity-30 mix-blend-screen z-0 animate-pulse-slow"></div>
+
       {/* hero section */}
-      <div className="container pb-8 sm:pb-0">
+      <div className="container pb-8 sm:pb-0 z-10">
         <Slider {...settings}>
           {ImageList.map((data) => (
-            <div>
-              <div className="grid grid-cols-1 sm:grid-cols-2">
-                {/* text content section */}
-                <div className="flex flex-col justify-center gap-4 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 relative z-10">
+            <div key={data.id}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-8">
+                {/* Text content section */}
+                <div className="flex flex-col justify-center gap-5 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 px-4">
                   <h1
                     data-aos="zoom-out"
-                    data-aos-duration="500"
-                    data-aos-once="true"
-                    className="text-5xl sm:text-6xl lg:text-7xl font-bold"
+                    className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-yellow-400 drop-shadow-[2px_2px_0_#000]"
                   >
                     {data.title}
                   </h1>
                   <p
                     data-aos="fade-up"
-                    data-aos-duration="500"
-                    data-aos-delay="100"
-                    className="text-sm"
+                    className="text-sm sm:text-base text-blue-200"
                   >
                     {data.description}
                   </p>
-                  <div
-                    data-aos="fade-up"
-                    data-aos-duration="500"
-                    data-aos-delay="300"
-                  >
+                  <div data-aos="fade-up">
                     <button
                       onClick={handleOrderPopup}
-                      className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full"
+                      className="bg-gradient-to-tr from-yellow-400 to-red-500 hover:scale-110 transform transition duration-300 text-black font-bold py-2 px-6 rounded-full shadow-lg hover:shadow-yellow-500/50"
                     >
-                      Order Now
+                      ⚡ Order Now
                     </button>
                   </div>
                 </div>
-                {/* image section */}
+
+                {/* Image section */}
                 <div className="order-1 sm:order-2">
                   <div
                     data-aos="zoom-in"
-                    data-aos-once="true"
-                    className="relative z-10"
+                    className="relative group transition-transform duration-500"
                   >
                     <img
                       src={data.img}
-                      alt=""
-                      className="w-[300px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto"
+                      alt="hero"
+                      className="w-[300px] h-[300px] sm:h-[450px] sm:w-[450px] object-contain mx-auto transform group-hover:rotate-3 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-yellow-500/30 duration-500 ease-in-out"
                     />
+                    {/* Comic-style spark effect */}
+                    <span className="absolute top-2 right-2 text-yellow-300 text-xl font-comic animate-ping-slow">
+                      💥
+                    </span>
                   </div>
                 </div>
               </div>

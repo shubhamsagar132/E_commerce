@@ -1,48 +1,72 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 const Popup = ({ orderPopup, setOrderPopup }) => {
+  // Close on ESC key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setOrderPopup(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [setOrderPopup]);
+
   return (
     <>
       {orderPopup && (
-        <div className="popup">
-          <div className="h-screen w-screen fixed top-0 left-0 bg-black/50 z-50 backdrop-blur-sm">
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 shadow-md bg-white dark:bg-gray-900 rounded-md duration-200 w-[300px]">
-              {/* header */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1>Order Now</h1>
-                </div>
-                <div>
-                  <IoCloseOutline
-                    className="text-2xl cursor-pointer "
-                    onClick={() => setOrderPopup(false)}
-                  />
-                </div>
-              </div>
-              {/* form section */}
-              <div className="mt-4">
+        <div
+          className="popup"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Order Form Popup"
+        >
+          <div className="fixed inset-0 bg-gradient-to-br from-[#0f172a] to-[#1e293b] bg-opacity-80 backdrop-blur-sm z-50 flex items-center justify-center animate-fade-in">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 w-[90%] max-w-md relative border-4 border-yellow-400 transition-all duration-300">
+              {/* Close Button */}
+              <button
+                onClick={() => setOrderPopup(false)}
+                aria-label="Close Order Form"
+                className="absolute top-3 right-3 text-2xl text-yellow-400 hover:text-red-500 transition duration-200"
+              >
+                <IoCloseOutline />
+              </button>
+
+              {/* Header */}
+              <h1 className="text-center text-3xl font-bold text-yellow-400 drop-shadow-[2px_2px_0_#000] mb-6">
+                ⚡ Order Now
+              </h1>
+
+              {/* Form */}
+              <form className="space-y-4">
                 <input
                   type="text"
-                  placeholder="Name"
-                  className=" w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4"
+                  placeholder="Your Name"
+                  required
+                  className="w-full rounded-full border-2 border-blue-300 px-4 py-2 bg-white dark:bg-slate-800 text-black dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
                 <input
                   type="email"
                   placeholder="Email"
-                  className=" w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4"
+                  required
+                  className="w-full rounded-full border-2 border-blue-300 px-4 py-2 bg-white dark:bg-slate-800 text-black dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
                 <input
                   type="text"
                   placeholder="Address"
-                  className=" w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4"
+                  required
+                  className="w-full rounded-full border-2 border-blue-300 px-4 py-2 bg-white dark:bg-slate-800 text-black dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
-                <div className="flex justify-center">
-                  <button className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full ">
-                    Order Now
+
+                {/* Submit Button */}
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-tr from-yellow-400 to-red-500 text-black font-bold px-6 py-2 rounded-full hover:scale-105 hover:shadow-yellow-500/50 shadow-md transition-transform duration-300"
+                  >
+                    🚀 Place Order
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
